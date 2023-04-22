@@ -1,10 +1,7 @@
-#ifndef _LWIPOPTS_EXAMPLE_COMMONH_H
-#define _LWIPOPTS_EXAMPLE_COMMONH_H
+#pragma once
 
-
-// Common settings used in most of the pico_w examples
-// (see https://www.nongnu.org/lwip/2_1_x/group__lwip__opts.html for details)
-
+// apparently needed...
+// from: https://github.com/raspberrypi/pico-examples/blob/01e8128953a9766608be0a9254afb7900107e222/pico_w/lwipopts_examples_common.h
 // allow override in some examples
 #ifndef NO_SYS
 #define NO_SYS                      1
@@ -58,33 +55,10 @@
 #define LWIP_STATS_DISPLAY          1
 #endif
 
-#define ETHARP_DEBUG                LWIP_DBG_OFF
-#define NETIF_DEBUG                 LWIP_DBG_OFF
-#define PBUF_DEBUG                  LWIP_DBG_OFF
-#define API_LIB_DEBUG               LWIP_DBG_OFF
-#define API_MSG_DEBUG               LWIP_DBG_OFF
-#define SOCKETS_DEBUG               LWIP_DBG_OFF
-#define ICMP_DEBUG                  LWIP_DBG_OFF
-#define INET_DEBUG                  LWIP_DBG_OFF
-#define IP_DEBUG                    LWIP_DBG_OFF
-#define IP_REASS_DEBUG              LWIP_DBG_OFF
-#define RAW_DEBUG                   LWIP_DBG_OFF
-#define MEM_DEBUG                   LWIP_DBG_OFF
-#define MEMP_DEBUG                  LWIP_DBG_OFF
-#define SYS_DEBUG                   LWIP_DBG_OFF
-#define TCP_DEBUG                   LWIP_DBG_OFF
-#define TCP_INPUT_DEBUG             LWIP_DBG_OFF
-#define TCP_OUTPUT_DEBUG            LWIP_DBG_OFF
-#define TCP_RTO_DEBUG               LWIP_DBG_OFF
-#define TCP_CWND_DEBUG              LWIP_DBG_OFF
-#define TCP_WND_DEBUG               LWIP_DBG_OFF
-#define TCP_FR_DEBUG                LWIP_DBG_OFF
-#define TCP_QLEN_DEBUG              LWIP_DBG_OFF
-#define TCP_RST_DEBUG               LWIP_DBG_OFF
-#define UDP_DEBUG                   LWIP_DBG_OFF
-#define TCPIP_DEBUG                 LWIP_DBG_OFF
-#define PPP_DEBUG                   LWIP_DBG_OFF
-#define SLIP_DEBUG                  LWIP_DBG_OFF
-#define DHCP_DEBUG                  LWIP_DBG_OFF
-
-#endif /* __LWIPOPTS_H__ */
+#define LWIP_HTTPD 1
+#define LWIP_HTTPD_SSI 1
+#define LWIP_HTTPD_CGI 1
+// don't include the tag comment - less work for the CPU, but may be harder to debug
+#define LWIP_HTTPD_SSI_INCLUDE_TAG 0
+// use generated fsdata
+#define HTTPD_FSDATA_FILE "my_fsdata.c"

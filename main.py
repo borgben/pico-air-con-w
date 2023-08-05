@@ -1,22 +1,17 @@
-import network
-import time
- 
-wlan = network.WLAN(network.STA_IF)
-wlan.active(True)
-wlan.connect("moon","123456789")
- 
-# Wait for connect or fail
-wait = 10
-while wait > 0:
-    if wlan.status() < 0 or wlan.status() >= 3:
-        break
-    wait -= 1
-    print('waiting for connection...')
-    time.sleep(1)
- 
-# Handle connection error
-if wlan.status() != 3:
-    raise RuntimeError('wifi connection failed')
-else:
-    print('connected')
-    print('IP: ', wlan.ifconfig()[0])
+from machine import Pin, ADC
+import time 
+
+led = Pin(16, Pin.OUT)
+led.value(1)
+time.sleep(2)
+# We set Pin26 to read the analog input from the IR reciever 
+ir_rec = Pin(22, Pin.IN, Pin.PULL_UP)
+
+current_value = ir_rec.value()
+start_value = time.ticks_us()
+while True: 
+    next_value = ir_rec.value()
+    if next_value != current_value:
+        print(str(time.ticks_diff(time.ticks_us(),start_value))+","+str(current_value))
+        start_value = time.ticks_us()
+        current_value = next_value
